@@ -23,68 +23,64 @@
             get: function() { return 'iPad'; }
         });
     })();
-</script>
-    <script>
-    // Force the game to detect this device as a mobile phone to enable touch controls
-    Object.defineProperty(navigator, 'userAgent', {
-        value: 'Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1',
-        writable: false
-    });
-</script>
+    </script>
+    
+    <!-- The Howler.js library we added earlier -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.4/howler.min.js"></script>
-<meta charset="utf-8"/>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<title>Clicker</title>
-<style>
-    html, body {
-        width: 100%;
-        height: 100%;
-        padding: 0px;
-        margin: 0px;
-    }
-    .fullscreen {
-        background: #242424;
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        top: 0px;
-        left: 0px;
-    }
-    #banner-container {
-        position: absolute;
-        bottom: 0px;
-        width: 100%;
-        height: 90px;
-        display: none !important; /* Reklam alanı tamamen kapalı */
-    }
-    #loading-overlay {
-        font-size: 20px;
-        z-index: 1;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
-    #icon {
-        max-width: 300px;
-        border-radius: 10px;
-        margin-bottom: 20px;
-    }
-    #progress-bar {
-        border-radius: 5px;
-        width: 90%;
-        max-width: 250px;
-        height: 20px;
-        background: #181818;
-        padding: 5px;
-    }
-    #progress-bar-fill {
-        border-radius: 3px;
-        width: 0%;
-        height: 100%;
-        background: #9747FF;
-    }
-</style>
+    
+    <meta charset="utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Clicker</title>
+    <style>
+        html, body {
+            width: 100%;
+            height: 100%;
+            padding: 0px;
+            margin: 0px;
+        }
+        .fullscreen {
+            background: #242424;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0px;
+            left: 0px;
+        }
+        #banner-container {
+            position: absolute;
+            bottom: 0px;
+            width: 100%;
+            height: 90px;
+            display: none !important;
+        }
+        #loading-overlay {
+            font-size: 20px;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        #icon {
+            max-width: 300px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        #progress-bar {
+            border-radius: 5px;
+            width: 90%;
+            max-width: 250px;
+            height: 20px;
+            background: #181818;
+            padding: 5px;
+        }
+        #progress-bar-fill {
+            border-radius: 3px;
+            width: 0%;
+            height: 100%;
+            background: #9747FF;
+        }
+    </style>
 </head>
 <body>
 <canvas id="canvas" class="fullscreen"></canvas>
@@ -94,7 +90,6 @@
     <div id="progress-bar"><div id="progress-bar-fill"></div></div>
 </div>
 
-<script src="add/howler.js"></script>
 <script>
     // Mobil viewport ayarı
     if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
@@ -161,7 +156,7 @@
     // === YANDEX SDK YERİNE BOŞ MOCK OBJESİ ===
     window.bridge = {
         platform: { id: '', language: 'en', payload: '', tld: '' },
-        device: { type: 'desktop' },
+        device: { type: 'mobile' }, // <-- CHANGED TO MOBILE
         player: { isAuthorizationSupported: false, isAuthorized: false, id: '', name: '', photos: [] },
         game: { visibilityState: 'visible' },
         storage: { defaultType: 'local', isSupported: () => true, isAvailable: () => true },
@@ -193,7 +188,7 @@
     window.getServerTime = () => sendMessageToUnity('OnGetServerTimeCompleted', Date.now().toString());
 
     // Device
-    window.getDeviceType = () => 'desktop';
+    window.getDeviceType = () => 'mobile'; // <-- CHANGED TO MOBILE
 
     // Player
     window.getIsPlayerAuthorizationSupported = () => 'false';
