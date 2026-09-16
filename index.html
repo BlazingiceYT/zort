@@ -2,6 +2,29 @@
 <html lang="en-us">
 <head>
     <script>
+    (function() {
+        // 1. Force the browser to report multiple touch points
+        Object.defineProperty(navigator, 'maxTouchPoints', {
+            get: function() { return 5; }
+        });
+
+        // 2. Force the browser to think it has touch events
+        if (!('ontouchstart' in window)) {
+            window.ontouchstart = null;
+        }
+
+        // 3. Force the User Agent to look exactly like an iPad
+        Object.defineProperty(navigator, 'userAgent', {
+            get: function() { return 'Mozilla/5.0 (iPad; CPU OS 15_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.0 Mobile/15E148 Safari/604.1'; }
+        });
+
+        // 4. Force the platform to say iPad
+        Object.defineProperty(navigator, 'platform', {
+            get: function() { return 'iPad'; }
+        });
+    })();
+</script>
+    <script>
     // Force the game to detect this device as a mobile phone to enable touch controls
     Object.defineProperty(navigator, 'userAgent', {
         value: 'Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1',
